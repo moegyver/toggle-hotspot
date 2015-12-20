@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="io.confusing.hotspottoggle" >
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".HotSpotToggle"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".ToggleIntentService"
+            android:exported="false" >
+        </service>
+        <service android:name=".WearReceiverService" >
+            <intent-filter>
+                <action android:name="com.google.android.gms.wearable.BIND_LISTENER" />
+            </intent-filter>
+        </service>
+        <service android:name=".ClientCheckIntentService">
+        </service>
+
+        <receiver
+            android:name=".CheckReceiver" >
+            <!--android:enabled="true"
+            android:exported="true"
+            android:process=":remote" > -->
+            <intent-filter>
+                <action android:name="io.confusing.hotspottoggle.action.CHECK" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>
